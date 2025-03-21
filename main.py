@@ -21,7 +21,7 @@ def index():
 #affiche le jeu
 @app.route('/jeu')
 def jeu():
-    return render_template("index.html")
+    return render_template("index.html", etat_du_jeu = session["etat_du_jeu"])
 
 # Exécution du code
 app.run(host='0.0.0.0', port=81)

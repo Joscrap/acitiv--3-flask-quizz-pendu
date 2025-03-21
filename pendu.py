@@ -10,11 +10,12 @@ class Pendu :
 
     def initialisation(mot_a_deviner , vies):
         mot_a_deviner = unidecode(mot_a_deviner).upper()
+        print("le mot pour cette partie est :", mot_a_deviner)
 
         data_etat_du_jeu = {
             "vies" : vies,
             "mot_a_deviner" : mot_a_deviner,
-            "mot_a_deviner" : "-" * len(mot_a_deviner),
+            "mot_a_afficher" : "-" * len(mot_a_deviner),
             "defaite" : False,
             "victoire" : False,
             "entree" : "",
@@ -45,6 +46,18 @@ class Pendu :
             message = Pendu.deviner_lettre(entree)
         else:
             message = Pendu.deviner_mot(entree)
+
+        data_retour["vies"] = vies
+        data_retour["mot_a_deviner"] = mot_a_deviner
+        data_retour["mot_a_afficher"] = mot_a_afficher
+        data_retour["lettres_proposees"] = lettres_propossees
+        data_retour["message"] = message
+
+        data_retour["victoire"] = not "-" in mot_a_afficher
+        if vies == 0:
+            data_retour["defaite"] = True
+            
+        return data_retour
 
     
     def deviner_lettre(entree):
