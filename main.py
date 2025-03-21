@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session, redirect
+from flask import Flask, render_template, session, redirect, request
 import os
 import random
 from pendu import Pendu
@@ -22,6 +22,12 @@ def index():
 @app.route('/jeu')
 def jeu():
     return render_template("index.html", etat_du_jeu = session["etat_du_jeu"])
+
+@app.route("/deviner", methods=["POST"])
+def deviner():
+    entree = request.form["entree"]
+    session["etat_du_jeu"] = Pendu.deviner(session["etat_du_jeu"], jeu)
+    return redirect("/jeu")
 
 # Exécution du code
 app.run(host='0.0.0.0', port=81)
