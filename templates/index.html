@@ -8,18 +8,32 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body>
+<body class="font-[cursive]">
   <header class="bg-orange-500">
     <h1 class="text-center py-6 text-5xl text-white">bienvenue</h1>
   </header>
 
-  <main class="my-24">
+  <main class="my-24" >
 
     <div class="flex justify-center ">
       <img src="/static/pendu{{etat_du_jeu.vies}}.png">
     </div>   
 
     <p class = "text-center font-blod">{{etat_du_jeu.mot_a_afficher}}</p>
+
+    <form method="POST" action="deviner" autocomplete="off">
+
+      <div class="flex justify-center ">
+        <input name="entree" type="text" class="border-2 border-black">
+      </div> 
+
+      <div class="flex justify-center m-16">
+        <button class="bg-blue-100 hover:bg-blue-400 p-2 rounded-lg" type="submit">Valider</button> 
+      </div> 
+    
+    </form>
+
+
 
   </main>
 
