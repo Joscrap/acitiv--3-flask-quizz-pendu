@@ -5,7 +5,7 @@ class Pendu :
     vies = 0
     mot_a_deviner = ""
     mot_a_afficher =""
-    lettres_propossees = []
+    lettres_proposees = []
 
 
     def initialisation(mot_a_deviner , vies):
@@ -19,7 +19,7 @@ class Pendu :
             "defaite" : False,
             "victoire" : False,
             "entree" : "",
-            "lettres_propossees" : []
+            "lettres_proposees" : []
         }
 
         return data_etat_du_jeu
@@ -29,12 +29,12 @@ class Pendu :
         global vies
         global mot_a_deviner
         global mot_a_afficher
-        global lettres_propossees
+        global lettres_proposees
 
         vies = etat_du_jeu["vies"]
         mot_a_deviner = etat_du_jeu["mot_a_deviner"]
-        mot_a_afficher["mot_a_afficher"]
-        lettres_propossees["lettres_propossees"]
+        mot_a_afficher = etat_du_jeu["mot_a_afficher"]
+        lettres_proposees = etat_du_jeu["lettres_proposees"]
 
         data_retour = {
             "defaite" : False,
@@ -42,7 +42,11 @@ class Pendu :
             "derniere_entree" : ""
         }
 
-        if len(entree) == 1 :
+        entree = unidecode(entree)
+
+        if len(entree) == 0 :
+            message = "Propose quelque chose !"
+        elif len(entree) == 1 :
             message = Pendu.deviner_lettre(entree)
         else:
             message = Pendu.deviner_mot(entree)
@@ -50,7 +54,7 @@ class Pendu :
         data_retour["vies"] = vies
         data_retour["mot_a_deviner"] = mot_a_deviner
         data_retour["mot_a_afficher"] = mot_a_afficher
-        data_retour["lettres_proposees"] = lettres_propossees
+        data_retour["lettres_proposees"] = lettres_proposees
         data_retour["message"] = message
 
         data_retour["victoire"] = not "-" in mot_a_afficher
@@ -61,14 +65,14 @@ class Pendu :
 
     
     def deviner_lettre(entree):
-        global lettres_propossees
+        global lettres_proposees
         global mot_a_afficher
         global vies
 
-        if entree in lettres_propossees:
+        if entree in lettres_proposees:
             return "Tu a déjà deviner cette lettre !!!"
         else:
-            lettres_propossees.append(entree)
+            lettres_proposees.append(entree)
             if entree in mot_a_deviner:
                 Pendu.actualisation_mot_a_afficher(entree)
                 return "Bonne piche, le mot contient cette lettre !!!"
@@ -77,7 +81,7 @@ class Pendu :
                 return "Oups, cette lettre n'est pas dans le mot !!!"
 
 
-    def deviner_mot(entree):
+    def deviner_mot(mot):
         global mot_a_deviner
         global vies
         global mot_a_afficher
@@ -94,9 +98,9 @@ class Pendu :
         global mot_a_deviner
         global mot_a_afficher
 
-        for i in rang(len(mot_a_deviner)):
+        for i in range(len(mot_a_deviner)):
             if lettre == mot_a_deviner[i]:
-                mot_tmp = list(mot_a_deviner)
+                mot_tmp = list(mot_a_afficher)
                 mot_tmp [i] = lettre
                 mot_a_afficher = "".join(mot_tmp)
 

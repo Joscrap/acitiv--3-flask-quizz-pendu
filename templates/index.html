@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>tu pus ?</title>
+  <title>Pendu</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
@@ -21,6 +21,32 @@
 
     <p class = "text-center font-blod">{{etat_du_jeu.mot_a_afficher}}</p>
 
+
+    {% if etat_du_jeu.victoire %}
+    <p class = "text-center text-8xl font-blod p-6">BRAVO</p>
+    <p class = "text-center text-4xl p-6">{{etat_du_jeu.message}}</p>
+
+    <div class="flex justify-center m-16">
+      <button class="bg-blue-300 hover:bg-blue-400 p-2 rounded-lg" onclick="window.location.href='/';">Rejouer</button> 
+    </div> 
+
+
+    {% elif etat_du_jeu.defaite %}
+    <p class = "text-center text-8xl font-blod p-6">DEFAITE !</p>
+    <p class = "text-center text-4xl p-6">{{etat_du_jeu.message}}</p>
+
+    <div class="flex justify-center m-16">
+      <button class="bg-blue-300 hover:bg-blue-400 p-2 rounded-lg" onclick="window.location.href='/';">Rejouer</button> 
+    </div> 
+
+    {% else %}
+
+    <p class = "text-center text-4xl p-6">{{etat_du_jeu.message}}</p>
+
+
+
+
+
     <form method="POST" action="deviner" autocomplete="off">
 
       <div class="flex justify-center ">
@@ -32,6 +58,7 @@
       </div> 
     
     </form>
+    {% endif %}
 
 
 

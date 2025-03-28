@@ -26,7 +26,7 @@ def jeu():
 @app.route("/deviner", methods=["POST"])
 def deviner():
     entree = request.form["entree"]
-    session["etat_du_jeu"] = Pendu.deviner(session["etat_du_jeu"], jeu)
+    session["etat_du_jeu"] = Pendu.deviner(session["etat_du_jeu"], entree)
     return redirect("/jeu")
 
 # Exécution du code
