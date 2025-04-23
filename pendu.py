@@ -88,10 +88,10 @@ class Pendu :
 
         if mot == mot_a_deviner:
             mot_a_afficher = mot
-            return "Bravo, tu a trouver le mot !"
+            return "tu a trouver le mot !"
         else :
             vies -= 1
-            return "Dommage, tu n'a pas trouver le bon mot !"
+            return "tu n'a pas trouver le bon mot !"
 
 
     def actualisation_mot_a_afficher(lettre):
